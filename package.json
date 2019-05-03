@@ -1,6 +1,6 @@
 {
   "name": "vue-auto-text",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": false,
   "scripts": {
     "build:lib": "vue build -t lib --name vue-auto-text -d ./dist/ ./src/index.js",

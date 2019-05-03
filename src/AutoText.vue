@@ -64,18 +64,19 @@ export default {
   },
   methods: {
     createTempSpan (str) {
-      const html = document.createElement('span')
-      html.innerText = str
-      html.className = 'getTextWidth-2'
-      this.$el.appendChild(html)
-      return html
+      const className = 'get-text-width-' + this._uid
+      const spanNode = document.createElement('span')
+      spanNode.innerText = str
+      spanNode.className = className
+      this.$el.appendChild(spanNode)
+      return spanNode
     },
-    removeTempSpan () {
-      document.querySelector('.getTextWidth-2').remove()
+    removeTempSpan (spanNode) {
+      this.$el.removeChild(spanNode)
     },
-    getTextWidth (html, fontSize) {
-      html.style.fontSize = fontSize + 'px'
-      return document.querySelector('.getTextWidth-2').offsetWidth
+    getTextWidth (fontSize, spanNode) {
+      spanNode.style.fontSize = fontSize
+      return spanNode.offsetWidth
     },
     computeFontsize () {
       this.$nextTick(() => {
@@ -87,19 +88,18 @@ export default {
         let fontSize = this.size
 
         // 创建临时span
-        const tempSpan = this.createTempSpan(this.computedText)
+        const spanNode = this.createTempSpan(this.computedText)
 
         // 获取当前字号下占用的宽度
-        let textWidth = this.getTextWidth(tempSpan, fontSize)
-
+        let textWidth = this.getTextWidth(fontSize, spanNode)
         // 字体占用宽度 > 设置宽度, 且没到最小字体, 则缩小字体
         while (textWidth > width && fontSize > minSize) {
           fontSize = fontSize - 1
-          textWidth = this.getTextWidth(tempSpan, fontSize)
+          textWidth = this.getTextWidth(fontSize, spanNode)
         }
 
         // 移除span
-        this.removeTempSpan()
+        this.removeTempSpan(spanNode)
 
         this.fontSize = fontSize
       })

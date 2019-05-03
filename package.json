@@ -1,10 +1,12 @@
 {
   "name": "vue-auto-text",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.1",
+  "private": false,
   "scripts": {
+    "build:lib": "vue build -t lib --name vue-auto-text -d ./dist/ ./src/index.js",
+    "build:docs": "vue-cli-service build",
+    "build": "npm run lint && npm run build:docs && npm run build:lib",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },

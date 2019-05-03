@@ -30,12 +30,12 @@ export default {
       type: Number,
       default: 16
     },
-    // 当文本超出时处理方式, elip 超出省略号, hidden 超出省略, break 超出换行
+    // 当文本超出时处理方式, elip 超出省略号, clip 超出截断, break 超出换行
     overflow: {
       type: String,
       default: 'ellipsis',
       validator (value) {
-        return value === 'ellipsis' || value === 'hidden' || value === 'break'
+        return value === 'ellipsis' || value === 'clip' || value === 'break'
       }
     }
   },
@@ -60,6 +60,7 @@ export default {
       const spanNode = document.createElement('span')
       spanNode.innerText = str
       spanNode.className = className
+      spanNode.style.whiteSpace = 'nowrap'
       this.$el.appendChild(spanNode)
       return spanNode
     },
@@ -107,7 +108,7 @@ export default {
 </script>
 
 <style>
-.auto-text.hidden {
+.auto-text.clip {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: clip;

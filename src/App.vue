@@ -1,28 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <auto-text
+      :minSize="16"
+      :size="24"
+      :text="name"
+      :width="100"
+    ></auto-text>
+    <input
+      type="text"
+      v-model="name"
+    >
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AutoText from './AutoText'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    AutoText
+  },
+  data () {
+    return {
+      name: '阿斯顿发送到阿斯顿发是'
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

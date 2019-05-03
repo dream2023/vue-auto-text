@@ -28,7 +28,7 @@ export default {
       type: Number,
       default: 16
     },
-    // 当文本超出时处理方式, elip 超出省略号, clip 超出截断, break 超出换行
+    // 当文本超出时处理方式, ellipsis 超出省略号, clip 超出截断, break 超出换行
     overflow: {
       type: String,
       default: 'ellipsis',

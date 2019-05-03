@@ -1,9 +1,7 @@
 <template>
   <div ref="box">
     <div
-      :class="{
-      [overflow]: fontSize <= minSize
-    }"
+      :class="overflow"
       :style="styles"
       class="auto-text"
     >

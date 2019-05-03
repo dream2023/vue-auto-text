@@ -1,45 +1,92 @@
-# vue-auto-text | 文字大小自适应
+# vue-auto-text | 文字大小自适应组件
 
-## 说明
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg)](https://opensource.org/licenses/mit-license.php)
+[![npm](https://img.shields.io/npm/v/vue-auto-text.svg)](https://www.npmjs.com/package/vue-auto-text)
+[![size](https://img.shields.io/bundlephobia/minzip/vue-auto-text.svg)](https://www.npmjs.com/package/vue-auto-text)
+[![download](https://img.shields.io/npm/dw/vue-auto-text.svg)](https://npmcharts.com/compare/vue-auto-text?minimal=true)
 
-当给定宽度是, 文字的大小自适应, 以保证不换行
+## 介绍
 
-## Project setup
+当给定宽度时, 文字的大小自适应, 以保证不溢出和换行
 
-```
-npm install
-```
+![演示图](./public/example.gif)
 
-### Compiles and hot-reloads for development
+## 文档
 
-```
-npm run serve
-```
+[https://dream2023.github.io/vue-auto-text](https://dream2023.github.io/vue-auto-text/)
 
-### Compiles and minifies for production
+## 安装
 
-```
-npm run build
-```
-
-### Run your tests
-
-```
-npm run test
+```bash
+npm install vue-auto-text --save
 ```
 
-### Lints and fixes files
+## 使用
 
+```js
+// 局部引入
+import AutoText from 'vue-auto-text'
+export default {
+  components: {
+    AutoText
+  }
+}
 ```
-npm run lint
+
+```js
+// 全局引入
+import AutoText from 'vue-auto-text'
+Vue.component(AutoText.name, AutoText)
 ```
 
-### Run your unit tests
+## Props 参数
 
+```js
+props: {
+  // 文本限定宽度, 单位px, 可选, 如果不传, 则默认是父元素宽度
+  width: Number,
+  // 给定文本, 可选, 如果不传, 则获取插槽内文本, 但无法检测变化
+  text: String,
+  // 默认 font-size 大小, 数字, 必填
+  size: {
+    type: Number,
+    required: true
+  },
+  // 最小 font-size 大小, 默认是 16 px
+  minSize: {
+    type: Number,
+    default: 16
+  },
+  // 当文本超出时处理方式, elip 超出省略号, hidden 超出省略, break 超出换行
+  overflow: {
+    type: String,
+    default: 'ellipsis',
+    validator (value) {
+      return value === 'ellipsis' || value === 'hidden' || value === 'break'
+    }
+  }
+}
 ```
-npm run test:unit
+
+## 例子
+
+```html
+<!-- 可以检查到变化 -->
+<auto-text :minSize="24" :size="48" :text="text" :width="200" />
 ```
 
-### Customize configuration
+```html
+<!-- 无法检测到变化 -->
+<auto-text :minSize="24" :size="48" :width="200">{{text}}</auto-text>
+```
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```html
+<!-- 超出换行 -->
+<auto-text
+  :minSize="24"
+  overflow="break"
+  :size="48"
+  :text="text"
+  :width="200"
+/>
+```

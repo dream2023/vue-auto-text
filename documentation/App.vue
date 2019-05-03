@@ -11,8 +11,8 @@
         <h2>介绍</h2>
         <p>当给定宽度时, 文字的大小自适应, 以保证不溢出和换行</p>
         <img
+          :src="`${publicPath}example.gif`"
           alt="vue-auto-text"
-          src="/example.gif"
         >
       </section>
       <section id="install">
@@ -111,6 +111,7 @@ export default {
   name: 'app',
   data () {
     return {
+      publicPath: process.env.BASE_URL,
       menuList: [
         {
           title: '介绍',
